@@ -39,3 +39,37 @@ src/
 ├── App.jsx        # Componente raiz e estrutura global
 ├── main.jsx       # Ponto de entrada da aplicação React
 └── routes.jsx     # Matriz de roteamento SPA
+
+```
+
+---
+
+## 🚀 Como Executar Localmente
+
+1. **Clonar o repositório:**
+   ```bash
+   git clone https://github.com/flaviocarvalho1006/deepplot.git
+   cd deepplot
+   ```
+
+2. **Instalar as dependências:**
+   ```bash
+   npm install
+   ```
+
+3. **Configurar as variáveis de ambiente:**
+   Cria um ficheiro `.env` na raiz do projeto e adiciona a tua chave da API do TMDB:
+   ```env
+   VITE_TMDB_API_KEY=a_tua_chave_aqui
+   ```
+
+4. **Iniciar o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Flávio Carvalho** — [GitHub](https://github.com/flaviocarvalho1006)
