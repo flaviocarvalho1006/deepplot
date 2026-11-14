@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../services/api";
+import { buscarDetalhesFilme } from "../../services/api";
 import { useFavoritos } from "../../hooks/useFavoritos";
 import styles from "./DetalhesFilme.module.css";
 
@@ -19,15 +19,8 @@ function Detalhes() {
         setCarregando(true);
         setErro(null);
 
-        const resposta = await api.get(`/movie/${id}`, {
-          params: {
-            api_key: import.meta.env.VITE_TMDB_API_KEY,
-            language: "en-US",
-            append_to_response: "videos",
-          },
-        });
-
-        setFilme(resposta.data);
+        const dadosFilme = await buscarDetalhesFilme(id);
+        setFilme(dadosFilme);
       } catch (err) {
         setErro("Não foi possível carregar as informações deste filme.");
       } finally {
@@ -39,26 +32,28 @@ function Detalhes() {
   }, [id]);
 
   if (carregando) {
-  return (
-    <main className={styles.estadoContainer}>
-      <p className={styles.textoLoading}>A carregar detalhes do filme...</p>
-    </main>
-  );
-}
+    return (
+      <main className={styles.estadoContainer}>
+        <p className={styles.textoLoading}>A carregar detalhes do filme...</p>
+      </main>
+    );
+  }
+
   if (erro) {
-  return (
-    <main className={styles.estadoContainer}>
-      <p className={styles.textoErro}>{erro}</p>
-      <button
-        type="button"
-        className={styles.botaoRecarregar}
-        onClick={() => window.location.reload()}
-      >
-        ↻ Tentar Novamente
-      </button>
-    </main>
-  );
-}
+    return (
+      <main className={styles.estadoContainer}>
+        <p className={styles.textoErro}>{erro}</p>
+        <button
+          type="button"
+          className={styles.botaoRecarregar}
+          onClick={() => window.location.reload()}
+        >
+          ↻ Tentar Novamente
+        </button>
+      </main>
+    );
+  }
+
   if (!filme) return null;
 
   const trailer = filme.videos?.results?.find(

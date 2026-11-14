@@ -35,4 +35,16 @@ export async function buscarFilmesPopulares(page = 1) {
   return await buscarFilmesPorFiltros({}, page);
 }
 
+export async function buscarDetalhesFilme(id) {
+  const resposta = await api.get(`/movie/${id}`, {
+    params: {
+      api_key: API_KEY,
+      language: "en-US",
+      append_to_response: "videos",
+    },
+  });
+
+  return resposta.data;
+}
+
 export default api;
